@@ -32,7 +32,25 @@ let app = {
                             fetch('/materia/' + name)
                                 .then(res => res.json())
                                 .then(function (data) {
-                                    console.log(data);
+                                    alert('Nombre materia: '+data.nombre+" , uvs: "+data.uv);
+                                    //console.log(data);
+                                });
+                        });
+                    });
+
+                    document.querySelectorAll(".delete").forEach(element => {
+                        element.addEventListener('click', function (evnt) {
+                            evnt.preventDefault();
+                            let name = this.parentElement // td
+                                .parentElement // tr
+                                .getElementsByClassName("name")[0]
+                                .innerText;
+                            fetch('/materia/delete/' + name)
+                                .then(res => res.json())
+                                .then(function (data) {
+                                    alert('Materia eliminada');
+                                    loadContent();
+                                    //console.log(data);
                                 });
                         });
                     });
@@ -41,7 +59,7 @@ let app = {
         let form = document.forms.saveMateria;
 
         form.addEventListener('submit', function (event) {
-            event.preventDefault();
+            //event.preventDefault();
             fetch(form.action, {
                     method: 'POST',
                     body: new URLSearchParams(new FormData(form))

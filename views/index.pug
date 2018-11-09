@@ -2,7 +2,7 @@ extends layout
 
 block content
   
-  form(action="/materia" method="post" name="saveMateria")
+  form(action="/materia/" method="post" name="saveMateria")
     input#name(type="text", name="name", placeholder="Nombre")
     input#uv(type="number", name="uv" placeholder="uv")
     input#descripcion(type="text" name="descripcion" placeholder="Descripcion")

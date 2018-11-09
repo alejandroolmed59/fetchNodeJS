@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
                 err
             });
         } else {
-
+            //console.log(materias);
             res.json(materias);
         }
     });
@@ -20,6 +20,29 @@ router.get('/', function (req, res) {
 router.get('/:name', function (req, res) {
     if (req.params.name) {
         materiaModel.findOne({
+            nombre: req.params.name
+        }, function (err, materia) {
+            if (err) {
+                res.status(500);
+                res.json({
+                    status: 500,
+                    err
+                });
+            } else {
+                res.json(materia);
+            }
+        });
+    } else {
+        res.status(400);
+        res.json({
+            status: 400,
+            err: 'Bad Request'
+        })
+    }
+});
+router.get('/delete/:name', function (req, res) {
+    if (req.params.name) {
+        materiaModel.deleteOne({
             nombre: req.params.name
         }, function (err, materia) {
             if (err) {
